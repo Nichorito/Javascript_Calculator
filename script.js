@@ -36,7 +36,7 @@ gridContainer.addEventListener('mousedown', (event) => {
             else {
                 sum2 += selectedButton;
                 console.log(sum2)
-                display.textContent = sum1 + ' ' + operator + ' ' + sum2;
+                display.textContent = a + ' ' + operator + ' ' + sum2;
             }
             
         }
@@ -61,6 +61,7 @@ gridContainer.addEventListener('mousedown', (event) => {
 
             a = roundedResult;
             b = undefined;
+            sum2 = '';
             operator = '';
             //Log results
             console.log(result);

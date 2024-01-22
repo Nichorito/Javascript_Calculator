@@ -32,7 +32,7 @@ body {
     border-bottom: 4px solid rgb(168, 168, 168);
     padding-right: 5%;
     font-family: 'Orbitron', sans-serif;
-    font-size: 3em;
+    font-size: 2.5vw;
 }
 
 /* GRID ITEMS */
@@ -40,7 +40,7 @@ body {
 .grid-item {
     display: flex;
     color: white;
-    font-size: 3em;
+    font-size: 2.5vw;
     justify-content: center;
     align-items: center;
     background-color: #7c7ccc;

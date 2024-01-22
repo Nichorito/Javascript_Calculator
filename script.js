@@ -1,23 +1,6 @@
 let gridContainer = document.querySelector('#grid-container')
 let buttons = document.querySelectorAll(".grid-item");
 
-let addButton = document.querySelector('#add');
-let subtractButton = document.querySelector('#subtract');
-let multiplyButton = document.querySelector('#multiply');
-let divideButton = document.querySelector('#divide');
-let equalButton = document.querySelector('equals')
-
-let zeroButton = document.querySelector('#zero');
-let oneButton = document.querySelector('#one');
-let twoButton = document.querySelector('#two');
-let threeButton = document.querySelector('#three');
-let fourButton = document.querySelector('#four')
-let fiveButton = document.querySelector('#five');
-let sixButton = document.querySelector('#six');
-let sevenButton = document.querySelector('#seven');
-let eightButton = document.querySelector('#eight');
-let nineButton = document.querySelector('#nine')
-
 let a = undefined;
 let sum1 = '';
 let b = undefined;
@@ -42,7 +25,7 @@ gridContainer.addEventListener('mousedown', (event) => {
 
             console.log(`you pressed the ${selectedButton} button`)
 
-            //Checks whether a is currently exists, if it doesn't then it adds it to
+            //Checks whether a currently exists, if it doesn't then it adds it to
             //the displayed string
             if (a == undefined ){
                 sum1 += selectedButton;
@@ -57,39 +40,82 @@ gridContainer.addEventListener('mousedown', (event) => {
             }
             
         }
+
+        //Tests for operator selection
         else if (/^[+\-X÷]$/.test(event.target.textContent) && operator == '') {
-            a = parseInt(sum1);
+            // If a doesn't exist then create it from sum1
+            if (a === undefined) {a = parseInt(sum1);} 
             operator = selectedButton;
-            display.textContent = sum1 + ' ' + selectedButton + ' ';
-            
+            display.textContent = a + ' ' + selectedButton + ' ';
         }
-        else if (selectedButton === '=') {
+
+        //If the equal button is pressed
+        else if (selectedButton === '=' && operator != '') {
             b = parseInt(sum2);
+            let result = operate(a, b, operator); 
+            let roundedResult = result;
+
+            //If result is not divisible by 1 then round to two decimal places
+            //as a float.  Makes it so that whole numbers do not have decimals
+            if (result % 1 !== 0) {roundedResult = result.toFixed(2);}
+
+            a = roundedResult;
+            b = undefined;
+            operator = '';
+            //Log results
+            console.log(result);
+            display.textContent = roundedResult;
+        }
+
+        //If the clear button is pressed, all items are reset to default values
+        else if (selectedButton === 'CLEAR') {
+            a = undefined;
+            sum1 = '';
+            b = undefined;
+            sum2 = '';
+            operator = '';
+            display.textContent = 0;
         }
         
-
         //Depress button on mousedown
         event.target.style.border = 'none';
     }
 });
 
+//Checks which operation to run
+function operate(a,b) {
+    let result = 0;
+    if (operator == '+') {
+        result = add(a,b);
+    } else if (operator == '-') {
+        result = subtract(a,b);
+    } else if (operator == 'X') {
+        result = multiply(a,b);
+    } else {
+        result = divide(a,b);
+    }
+    return result;
+}
 
+///////////////////////// Possible operations ////////////////////////////
 
-
-
-
-const add = function(a, b) {
+function add(a, b) {
 	return a + b;
 };
 
-const subtract = function(a, b ) {
+function subtract(a, b ) {
 	return a - b;
 };
 
-const multiply = function(values) {
-  return values.reduce((accumulator, currentValue) => accumulator * currentValue, 1);
+function multiply(a, b) {
+  return a * b;
 };
 
+function divide(a,b) {
+    return a / b;
+}
+
+////////////////////////////////////////////////////////////////////////
 
 //Release button on mouseup
 gridContainer.addEventListener('mouseup', (event) => {

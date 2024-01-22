@@ -23,7 +23,6 @@ let sum1 = '';
 let b = undefined;
 let sum2 = '';
 let operator = '';
-//Store the value for a
 
 gridContainer.addEventListener('mousedown', (event) => {
 
@@ -54,11 +53,18 @@ gridContainer.addEventListener('mousedown', (event) => {
             else {
                 sum2 += selectedButton;
                 console.log(sum2)
+                display.textContent = sum1 + ' ' + operator + ' ' + sum2;
             }
             
         }
-        else if (/^[+\-X÷]$/.test(event.target.textContent)) {
+        else if (/^[+\-X÷]$/.test(event.target.textContent) && operator == '') {
             a = parseInt(sum1);
+            operator = selectedButton;
+            display.textContent = sum1 + ' ' + selectedButton + ' ';
+            
+        }
+        else if (selectedButton === '=') {
+            b = parseInt(sum2);
         }
         
 

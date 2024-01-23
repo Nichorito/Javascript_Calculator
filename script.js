@@ -21,7 +21,7 @@ gridContainer.addEventListener('mousedown', (event) => {
         // ^ &  $ begins and ends the string to test for
         // [0-9] is the string to test for 
 
-        if (/^[0-9]$/.test(event.target.textContent)) {
+        if (/^[0-9.]$/.test(event.target.textContent)) {
 
             console.log(`you pressed the ${selectedButton} button`)
 
@@ -44,14 +44,14 @@ gridContainer.addEventListener('mousedown', (event) => {
         //Tests for operator selection
         else if (/^[+\-X÷]$/.test(event.target.textContent) && operator == '') {
             // If a doesn't exist then create it from sum1
-            if (a === undefined) {a = parseInt(sum1);} 
+            if (a === undefined) {a = parseFloat(sum1);} 
             operator = selectedButton;
             display.textContent = a + ' ' + selectedButton + ' ';
         }
 
         //If the equal button is pressed
         else if (selectedButton === '=' && operator != '') {
-            b = parseInt(sum2);
+            b = parseFloat(sum2);
             let result = operate(a, b, operator); 
             let roundedResult = result;
 

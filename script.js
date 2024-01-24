@@ -30,12 +30,14 @@ gridContainer.addEventListener('mousedown', (event) => {
             if (a == undefined ){
                 sum1 += selectedButton;
                 display.textContent = sum1;
-                console.log(sum1)
+                console.log('Sum 1 is: ' + sum1)
             }
             //If a currently exists, then start creating sum 2 
             else {
+                //If operator doesn't exist then return control to main loop
+                if (operator == '') {return;}
                 sum2 += selectedButton;
-                console.log(sum2)
+                console.log('Sum 2 is: ' + sum2)
                 display.textContent = a + ' ' + operator + ' ' + sum2;
             }
             
